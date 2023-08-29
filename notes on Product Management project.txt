@@ -1,0 +1,105 @@
+-> CONTENT
+(1) Controller package -> MyController class : has all HTTP requests POST,GET,PUT,DELETE with their URL.
+(2) Data package 
+       (i) Entity package -> ProductData class : this maps with our database, all the fields are mapped with their respective column names & id too which is 
+                             auto-generated,no need to give it while adding a product.
+       (ii) Repository package -> ProductRepo class : extends JpaRepository<ProductData,Integer> , here first parameter is class mapped with Database i.e. ProductData
+                                  and second parameter is data type of ID i.e. Integer.
+(3) Model package
+    (i) Request package -> ProductRequest class : this contains the request i.e. fields to get from user when they POST or UPDATE(PUT). We need name,description & type.
+    (ii) Response package -> ProductResponse class: contains message to show to user when operation is completed.
+
+(4) Sevice package
+    (i) ProductService interface : contains all the methods we made for GET,POST,PUT,DELETE. Their implementation are in ProductServiceImpl class.
+    (ii)ProductServiceImpl class: here we build all methods add,get,getbyid,delete,update. We inject ProductRepo to use JPA methods like .save(),
+                                  .findAll(), .findById(), .deleteById etc...
+
+
+-> WORKING
+In CONTROLLER Class:
+* using @RestController tells data is returned in JSON format.
+* @Autowired productService to make its objects & use its methods without using this ptr.
+* POST: ResponseEntity is used to manipulate HTTP response. ResponseEntity is a class we use to send STATUS CODE. ResponseEntity is child class of HttpEntity.
+        ResponseEntity.status(HttpStatus.NOT_FOUND).build();        
+        // here object of ResponseEntity contains status of NOT_FOUND and build() creates a new object.
+* GET ALL: returning the list
+* GET BY ID: returning the product via its id
+* DELETE: deleting product & returning message "Product Deleted Successfully" with HttpStatus = OK.
+
+-> In ProductService interface:
+It contains all methods and their implementation is done in ProductServiceImpl class.
+
+-> In ProductServiceImpl class:
+marked it as service class so that controller comes to it @Service, 
+for POST: creating a new  
+
+NOTE: //@RequestMapping("/api/products") either use this on top of Controller OR give url to each HTTP Request individually i.e. GET,POST,PUT,DELETE
+
+NOTE: @Entity is mainly used when we want to create a table.
+      @Entity annotation specifies that the class is an entity and is mapped to a database table. 
+      @Table annotation specifies the name of the database table to be used for mapping.
+      @AllArgsConstructor annotation generates a constructor with one parameter for every field in the class.
+      @NoArgsConstructor will generate a constructor with no parameters. 
+
+-> Implementation of UPDATE:
+// public ProductData updateProductData(ProductData productData, Integer productCode) {
+//        Optional<ProductData> existingData = productRepo.findById(productCode);
+//        existingData.get().setProductName(productData.getProductName());
+//        existingData.get().setProductDescription(productData.getProductDescription());
+//        existingData.get().setProductType(productData.getProductType());
+//        productRepo.save(existingData.get());
+//        return existingData;
+// }
+
+PUT in controller class:
+// URL -> http://localhost:8080/api/products/1
+//    @PutMapping("/api/products/{id}")
+//    public ResponseEntity<ProductData> updatingProduct(@PathVariable("id") Integer productCode,
+//                                                       @RequestBody ProductData productData){
+//        return new ResponseEntity<ProductData>(productService.updateProductData(productData,productCode), HttpStatus.OK);
+//
+//    }
+
+-> NOTE:(i)In order to create a complete response for the api we use ResponseEntity<>
+        (ii) to convert the request i.e. JSON into java object use @RequestBody
+
+-> CUSTOM FINDER METHODS
+Some basic JPARepo methods:
+(1)findById   (2)deleteById  (3)save  (4)delete   (5)deleteAll  (6)findBy
+
+Problem comes when we need (i) data by name or (ii)data by name & password or (iii)data by name or password or (iv)data with name starting with 'S'
+
+-> EXCEPTIONS Example
+class HelloWorld {
+    public static void main(String[] args) {
+        try{
+            int num1=7;
+            int num2=0;
+            int result = num1/num2;
+            System.out.println("Output is " + result);
+        }
+        catch(ArithmeticException e){
+            System.out.println("ERROR");
+        }
+        finally{
+            System.out.println("BYE!"); 
+        }
+    
+}
+}
+// ArithmeticException is sub-class of RuntimeException
+// RuntimeException is sub-class of Exception
+// finally block gets executed even if we get exception or not
+
+
+
+
+
+
+
+
+
+
+
+
+

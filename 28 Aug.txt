@@ -1,0 +1,71 @@
+-> GET ALL()
+@Override
+    public List<ProductData> getAllProducts() {
+//        List<ProductData> allProducts = new ArrayList<ProductData>();
+//        ProductData productData = new ProductData();
+//        Collections.addAll(allProducts,productData);
+//        return allProducts;
+
+        List<ProductData> listOfProducts = new ArrayList<>();
+        for (iterator : ProductData productData) {
+            listOfProducts.add();
+        }
+        return listOfProducts;
+
+//         return productRepo.findAll();               directly using repository function i.e. .findAll()
+    }
+
+-> GET BY ID()
+@Override
+    public Optional<ProductData> getProductById(Integer productCode) {
+        return productRepo.findById(productCode);
+}
+
+-> DELETE (Soft Delete i.e. delete by id)
+ @Override
+    public ResponseEntity<String> deleteProduct(Integer productCode) {
+        if(productRepo.existsById(productCode)) {
+            productRepo.deleteById(productCode);
+            return new ResponseEntity<String>("Product Deleted Successfully!",HttpStatus.OK);
+        }
+        else{
+//            ProductResponse productResponse = new ProductResponse();
+//            productResponse.setMessage("Product Code Invalid");
+            return new ResponseEntity<String>("Product Code Invalid",HttpStatus.BAD_REQUEST);
+        }
+
+//        productRepo.deleteById(productCode);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

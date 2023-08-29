@@ -1,0 +1,34 @@
+// productRepo.deleteById(productCode);      this is HARD DELETE as it removes the product from database
+
+-> Spring Boot Training Topics 
+
+1. Filter -filter, order, oncePerRequestFilter 
+2. Enums – Case sensitive 
+   Converter (for enums) 
+3.Handling Joins with JPA-  
+
+Column Transformer, 
+Enumerated (for enums only) 
+Joins-Eager Loading, Lazy Loading ( learn for next session) 
+Criteria Builder 
+Predicate- like and equal behave as where clauses in query 
+
+Guidelines-  Use functions more   
+
+* Topic Left 
+Bean Management , Derived Query
+
+-> Database Function 
+1.Subqueries – when we perform separate query to fetch data 
+Joins –combine multiple table to fetch data. Joins are better in many conditions  
+
+2.Stored Procedure – in variable size must be same with  column size,detailed name  
+
+3.Case when used within query but if else not used within query  
+
+4.Dynamic Query – conditional query (change with conditions) but it does not have any guarantee it will work  
+
+* Topic Left 
+1.Transactions 
+2.Json Data types 
+3.Exception Handlings 
